@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Student Assistant</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- ========================================
+         HEADER
+    ======================================== -->
+
+    <header class="top-header">
+
+        <div class="logo-area">
+            <h1>Smart Student Assistant</h1>
+        </div>
+
+        <div class="header-right">
+            <span class="student-label">
+                Student Dashboard
+            </span>
+        </div>
+
+    </header>
+
+
+    <!-- ========================================
+         SIDEBAR
+    ======================================== -->
+
+    <aside class="sidebar">
+
+        <nav class="sidebar-nav">
+
+            <a href="#dashboard" class="nav-item active">
+                <span class="nav-icon">🏠</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="#subjects" class="nav-item">
+                <span class="nav-icon">📚</span>
+                <span>Subjects</span>
+            </a>
+
+            <a href="#tasks" class="nav-item">
+                <span class="nav-icon">✅</span>
+                <span>Tasks</span>
+            </a>
+
+            <a href="#notes" class="nav-item">
+                <span class="nav-icon">📝</span>
+                <span>Notes</span>
+            </a>
+
+            <a href="#schedule" class="nav-item">
+                <span class="nav-icon">📅</span>
+                <span>Schedule</span>
+            </a>
+
+            <a href="#exams" class="nav-item">
+                <span class="nav-icon">📋</span>
+                <span>Exams</span>
+            </a>
+
+            <a href="#progress-dashboard" class="nav-item">
+                <span class="nav-icon">📈</span>
+                <span>Progress</span>
+            </a>
+
+            <a href="#academic-insights" class="nav-item">
+                <span class="nav-icon">🧠</span>
+                <span>Insights</span>
+            </a>
+
+            <a href="#academic-analytics" class="nav-item">
+                <span class="nav-icon">📊</span>
+                <span>Analytics</span>
+            </a>
+
+            <a href="#study-timer" class="nav-item">
+                <span class="nav-icon">⏱️</span>
+                <span>Study Timer</span>
+            </a>
+
+        </nav>
+<button
+            id="logout-button"
+            class="logout-button">
+            🚪 Logout
+        </button>
+    </aside>
+
+
+    <!-- ========================================
+         MAIN CONTENT
+    ======================================== -->
+
+    <main class="main-content" id="dashboard">
+
+
+        <!-- ========================================
+     WELCOME
+======================================== -->
+
+<section class="welcome-section">
+
+    <div>
+
+        <h2 id="welcome-user">
+            Welcome back, Student! 👋
+        </h2>
+
+        <p>
+            Stay organized, track your progress,
+            and achieve your academic goals.
+        </p>
+
+    </div>
+
+</section>
+
+
+        <!-- ========================================
+             STAT CARDS
+        ======================================== -->
+
+        <section class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ✅
+                </div>
+
+                <div class="stat-info">
+
+                    <h3>
+                        Pending Tasks
+                    </h3>
+
+                    <p id="task-count">
+                        0
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📚
+                </div>
+
+                <div class="stat-info">
+
+                    <h3>
+                        Subjects
+                    </h3>
+
+                    <p id="subject-count">
+                        0
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📋
+                </div>
+
+                <div class="stat-info">
+
+                    <h3>
+                        Upcoming Exams
+                    </h3>
+
+                    <p id="exam-count">
+                        0
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📊
+                </div>
+
+                <div class="stat-info">
+
+                    <h3>
+                        Overall Progress
+                    </h3>
+
+                    <p>
+                        <span id="overall-progress">
+                            0
+                        </span>%
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ========================================
+             SMART DASHBOARD
+        ======================================== -->
+
+        <section class="dashboard-section smart-dashboard">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Smart Dashboard
+                    </h2>
+
+                    <p>
+                        Your academic information at a glance.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="smart-grid">
+
+
+                <!-- TODAY'S SCHEDULE -->
+
+                <div class="smart-card">
+
+                    <div class="smart-card-header">
+
+                        <div class="smart-card-title">
+
+                            <span class="smart-icon">
+                                📅
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Today's Schedule
+                                </h3>
+
+                                <p>
+                                    Classes and activities for today
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="today-schedule"
+                        class="smart-card-content">
+
+                        <p class="empty-message">
+                            No schedule available for today.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- EXAM ALERT -->
+
+                <div class="smart-card exam-alert-card">
+
+                    <div class="smart-card-header">
+
+                        <div class="smart-card-title">
+
+                            <span class="smart-icon">
+                                🚨
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Upcoming Exam Alert
+                                </h3>
+
+                                <p>
+                                    Keep track of your upcoming exams
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="upcoming-exam-alert"
+                        class="smart-card-content">
+
+                        <p class="empty-message">
+                            No upcoming exams.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PROGRESS SUMMARY -->
+
+                <div class="smart-card">
+
+                    <div class="smart-card-header">
+
+                        <div class="smart-card-title">
+
+                            <span class="smart-icon">
+                                📊
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Progress Summary
+                                </h3>
+
+                                <p>
+                                    Your subject-wise progress
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="progress-summary"
+                        class="smart-card-content">
+
+                        <p class="empty-message">
+                            Add subjects to see your progress.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STUDY RECOMMENDATION -->
+
+                <div class="smart-card recommendation-card">
+
+                    <div class="smart-card-header">
+
+                        <div class="smart-card-title">
+
+                            <span class="smart-icon">
+                                🧠
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Study Recommendation
+                                </h3>
+
+                                <p>
+                                    Personalized study suggestion
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="study-recommendation"
+                        class="smart-card-content">
+
+                        <p class="empty-message">
+                            Add subjects, tasks, and exams to receive
+                            study recommendations.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             TODAY'S OVERVIEW
+        ======================================== -->
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Today's Overview
+                    </h2>
+
+                    <p>
+                        A quick summary of your academic activity.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="overview-grid">
+
+
+                <div class="overview-item">
+
+                    <div class="overview-icon">
+                        📚
+                    </div>
+
+                    <div>
+
+                        <p class="overview-title">
+                            Subjects
+                        </p>
+
+                        <h3 id="overview-subjects">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="overview-item">
+
+                    <div class="overview-icon">
+                        ✅
+                    </div>
+
+                    <div>
+
+                        <p class="overview-title">
+                            Pending Tasks
+                        </p>
+
+                        <h3 id="overview-tasks">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="overview-item">
+
+                    <div class="overview-icon">
+                        📋
+                    </div>
+
+                    <div>
+
+                        <p class="overview-title">
+                            Upcoming Exams
+                        </p>
+
+                        <h3 id="overview-exams">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="overview-item">
+
+                    <div class="overview-icon">
+                        ⏱️
+                    </div>
+
+                    <div>
+
+                        <p class="overview-title">
+                            Study Sessions
+                        </p>
+
+                        <h3 id="overview-sessions">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+        <!-- ========================================
+     NOTIFICATIONS & REMINDERS
+======================================== -->
+
+<section
+    id="notifications-section"
+    class="dashboard-section">
+
+    <div class="section-heading">
+
+        <div>
+
+            <h2>
+                🔔 Notifications & Reminders
+            </h2>
+
+            <p>
+                Important tasks, deadlines, and exams that need your attention.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div id="notifications-list">
+
+        <div class="notification-empty">
+            🎉 No important notifications right now.
+        </div>
+
+    </div>
+
+</section>
+
+
+        <!-- ========================================
+             TASKS
+        ======================================== -->
+
+        <section
+            class="dashboard-section"
+            id="tasks">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Tasks
+                    </h2>
+
+                    <p>
+                        Manage your academic tasks and assignments.
+                    </p>
+
+                </div>
+
+                <button
+                    id="add-task-button"
+                    class="primary-button">
+
+                    + Add Task
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="task-list"
+                class="task-list">
+
+                <p class="empty-message">
+                    No tasks available.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             UPCOMING EXAMS
+        ======================================== -->
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Upcoming Exams
+                    </h2>
+
+                    <p>
+                        Keep track of your examination schedule.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="dashboard-exam-list"
+                class="exam-list">
+
+                <p class="empty-message">
+                    No upcoming exams.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             SUBJECTS
+        ======================================== -->
+
+        <section
+            class="dashboard-section"
+            id="subjects">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Subjects
+                    </h2>
+
+                    <p>
+                        Track your progress in each subject.
+                    </p>
+
+                </div>
+
+                <button
+                    id="add-subject-button"
+                    class="primary-button">
+
+                    + Add Subject
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="subject-list"
+                class="subject-list">
+
+                <p class="empty-message">
+                    No subjects added yet.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             NOTES
+        ======================================== -->
+
+        <section
+            class="dashboard-section"
+            id="notes">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Notes
+                    </h2>
+
+                    <p>
+                        Save important study notes and information.
+                    </p>
+
+                </div>
+
+                <button
+                    id="add-note-button"
+                    class="primary-button">
+
+                    + Add Note
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="note-list"
+                class="note-list">
+
+                <p class="empty-message">
+                    No notes available.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             SCHEDULE
+        ======================================== -->
+
+        <section
+            class="dashboard-section"
+            id="schedule">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Schedule
+                    </h2>
+
+                    <p>
+                        Organize your classes and daily activities.
+                    </p>
+
+                </div>
+
+                <button
+                    id="add-schedule-button"
+                    class="primary-button">
+
+                    + Add Schedule
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="schedule-list"
+                class="schedule-list">
+
+                <p class="empty-message">
+                    No schedule available.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             EXAMS
+        ======================================== -->
+
+        <section
+            class="dashboard-section"
+            id="exams">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Exams
+                    </h2>
+
+                    <p>
+                        Manage your examination dates and times.
+                    </p>
+
+                </div>
+
+                <button
+                    id="add-exam-button"
+                    class="primary-button">
+
+                    + Add Exam
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="exam-list"
+                class="exam-list">
+
+                <p class="empty-message">
+                    No exams added yet.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             PROGRESS DASHBOARD
+        ======================================== -->
+
+        <section
+            class="dashboard-section"
+            id="progress-dashboard">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Progress Dashboard
+                    </h2>
+
+                    <p>
+                        Track your overall academic performance.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="progress-dashboard-grid">
+
+
+                <div class="progress-dashboard-card">
+
+                    <div class="progress-dashboard-icon">
+                        📊
+                    </div>
+
+                    <div>
+
+                        <p>
+                            Overall Progress
+                        </p>
+
+                        <h3>
+                            <span id="progress-overall">
+                                0
+                            </span>%
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="progress-dashboard-card">
+
+                    <div class="progress-dashboard-icon">
+                        ✅
+                    </div>
+
+                    <div>
+
+                        <p>
+                            Completed Tasks
+                        </p>
+
+                        <h3 id="progress-completed-tasks">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="progress-dashboard-card">
+
+                    <div class="progress-dashboard-icon">
+                        ⏳
+                    </div>
+
+                    <div>
+
+                        <p>
+                            Pending Tasks
+                        </p>
+
+                        <h3 id="progress-pending-tasks">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="progress-dashboard-card">
+
+                    <div class="progress-dashboard-icon">
+                        ⏱️
+                    </div>
+
+                    <div>
+
+                        <p>
+                            Study Sessions
+                        </p>
+
+                        <h3 id="progress-study-sessions">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="progress-performance-card">
+
+                <div class="progress-performance-header">
+
+                    <div>
+
+                        <h3>
+                            Subject Performance
+                        </h3>
+
+                        <p>
+                            View your progress in each subject.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="progress-subject-list"
+                    class="progress-subject-list">
+
+                    <p class="empty-message">
+                        Add subjects to see your performance.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="academic-summary-card">
+
+                <div class="academic-summary-icon">
+                    🎯
+                </div>
+
+                <div>
+
+                    <h3>
+                        Academic Summary
+                    </h3>
+
+                    <p id="academic-summary-text">
+                        Add your academic data to generate
+                        a performance summary.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             INTELLIGENT ACADEMIC INSIGHTS
+        ======================================== -->
+
+        <section
+            class="dashboard-section"
+            id="academic-insights">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        🧠 Intelligent Academic Insights
+                    </h2>
+
+                    <p>
+                        Personalized insights based on your academic activity.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="insights-grid">
+
+
+                <div class="insight-card">
+
+                    <div class="insight-icon">
+                        🎯
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Study Focus
+                        </h3>
+
+                        <p id="study-focus-insight">
+                            Add subjects and tasks to receive
+                            a study focus recommendation.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="insight-card">
+
+                    <div class="insight-icon">
+                        📚
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Subject Insight
+                        </h3>
+
+                        <p id="subject-insight">
+                            Your subject performance will appear here.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="insight-card">
+
+                    <div class="insight-icon">
+                        ✅
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Task Insight
+                        </h3>
+
+                        <p id="task-insight">
+                            Your task completion pattern will appear here.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="insight-card">
+
+                    <div class="insight-icon">
+                        ⏰
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Exam Insight
+                        </h3>
+
+                        <p id="exam-insight">
+                            Your upcoming exam information will appear here.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             ACADEMIC ANALYTICS
+        ======================================== -->
+
+        <section
+            class="dashboard-section"
+            id="academic-analytics">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        📊 Academic Analytics
+                    </h2>
+
+                    <p>
+                        Analyze your academic performance and study activity.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ANALYTICS CARDS -->
+
+            <div class="analytics-grid">
+
+
+                <!-- TASK COMPLETION -->
+
+                <div class="analytics-card">
+
+                    <div class="analytics-icon">
+                        ✅
+                    </div>
+
+                    <div class="analytics-info">
+
+                        <h3>
+                            Task Completion
+                        </h3>
+
+                        <p>
+                            <span id="analytics-task-completion">
+                                0
+                            </span>%
+                        </p>
+
+                        <small>
+                            Completed tasks
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SUBJECT AVERAGE -->
+
+                <div class="analytics-card">
+
+                    <div class="analytics-icon">
+                        📚
+                    </div>
+
+                    <div class="analytics-info">
+
+                        <h3>
+                            Average Subject Progress
+                        </h3>
+
+                        <p>
+                            <span id="analytics-subject-average">
+                                0
+                            </span>%
+                        </p>
+
+                        <small>
+                            Average across subjects
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STUDY SESSIONS -->
+
+                <div class="analytics-card">
+
+                    <div class="analytics-icon">
+                        ⏱️
+                    </div>
+
+                    <div class="analytics-info">
+
+                        <h3>
+                            Study Sessions
+                        </h3>
+
+                        <p id="analytics-study-sessions">
+                            0
+                        </p>
+
+                        <small>
+                            Completed study sessions
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- EXAM PREPARATION -->
+
+                <div class="analytics-card">
+
+                    <div class="analytics-icon">
+                        📝
+                    </div>
+
+                    <div class="analytics-info">
+
+                        <h3>
+                            Exam Preparation
+                        </h3>
+
+                        <p>
+                            <span id="analytics-exam-preparation">
+                                0
+                            </span>%
+                        </p>
+
+                        <small>
+                            Based on subject progress
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ANALYTICS DETAILS -->
+
+            <div class="analytics-details-grid">
+                <!-- VISUAL ANALYTICS -->
+
+<div class="visual-analytics-grid">
+
+    <!-- SUBJECT PROGRESS -->
+
+    <div class="visual-analytics-card">
+
+        <div class="visual-analytics-header">
+            <div>
+                <h3>📚 Subject Progress</h3>
+                <p>Current progress of each subject.</p>
+            </div>
+        </div>
+
+        <div
+            id="subject-progress-chart"
+            class="subject-progress-chart">
+            
+            <p class="empty-message">
+                Add subjects to view the progress chart.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- TASK PERFORMANCE -->
+
+    <div class="visual-analytics-card">
+
+        <div class="visual-analytics-header">
+            <div>
+                <h3>✅ Task Performance</h3>
+                <p>Completed and pending tasks.</p>
+            </div>
+        </div>
+
+        <div
+            id="task-performance-chart"
+            class="task-performance-chart">
+
+            <p class="empty-message">
+                Add tasks to view task performance.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- STUDY ACTIVITY -->
+
+    <div class="visual-analytics-card">
+
+        <div class="visual-analytics-header">
+            <div>
+                <h3>⏱️ Study Activity</h3>
+                <p>Your completed study sessions.</p>
+            </div>
+        </div>
+
+        <div
+            id="study-activity-chart"
+            class="study-activity-chart">
+
+            <p class="empty-message">
+                Complete study sessions to view activity.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ACADEMIC SUMMARY -->
+
+    <div class="visual-analytics-card">
+
+        <div class="visual-analytics-header">
+            <div>
+                <h3>🎯 Academic Summary</h3>
+                <p>Quick overview of your academic status.</p>
+            </div>
+        </div>
+
+        <div
+            id="academic-summary-chart"
+            class="academic-summary-chart">
+
+            <p class="empty-message">
+                Add academic data to generate your summary.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+                <!-- PERFORMANCE OVERVIEW -->
+
+                <div class="analytics-detail-card">
+
+                    <div class="analytics-detail-header">
+
+                        <div>
+
+                            <h3>
+                                📈 Performance Overview
+                            </h3>
+
+                            <p>
+                                Your current academic indicators.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="analytics-performance-overview"
+                        class="analytics-detail-content">
+
+                        <p class="empty-message">
+                            Add academic data to view your performance overview.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STUDY ACTIVITY -->
+
+                <div class="analytics-detail-card">
+
+                    <div class="analytics-detail-header">
+
+                        <div>
+
+                            <h3>
+                                ⏱️ Study Activity
+                            </h3>
+
+                            <p>
+                                Your completed study sessions.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="analytics-study-activity"
+                        class="analytics-detail-content">
+
+                        <p class="empty-message">
+                            Complete study sessions to see your activity.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+<!-- SMART RECOMMENDATIONS -->
+
+<div class="recommendation-section">
+
+    <div class="recommendation-header">
+        <div>
+            <h3>🤖 Smart Recommendations</h3>
+            <p>
+                Personalized suggestions based on your academic data.
+            </p>
+        </div>
+    </div>
+
+    <div
+        id="smart-recommendations"
+        class="recommendations-list">
+
+        <div class="recommendation-item">
+
+            <div class="recommendation-icon">
+                💡
+            </div>
+
+            <div class="recommendation-content">
+
+                <h4>Getting Started</h4>
+
+                <p>
+                    Add your subjects, tasks, and exams
+                    to receive personalized recommendations.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+        </section>
+
+
+        <!-- ========================================
+             STUDY TIMER
+        ======================================== -->
+
+        <section
+            class="dashboard-section timer-section"
+            id="study-timer">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Study Timer
+                    </h2>
+
+                    <p>
+                        Use focused study sessions to improve
+                        your productivity.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="timer-container">
+
+                <div
+                    id="timer-display"
+                    class="timer-display">
+
+                    25:00
+
+                </div>
+
+
+                <div class="timer-controls">
+
+                    <button
+                        id="start-timer"
+                        class="primary-button">
+
+                        Start
+
+                    </button>
+
+                    <button
+                        id="pause-timer"
+                        class="secondary-button">
+
+                        Pause
+
+                    </button>
+
+                    <button
+                        id="reset-timer"
+                        class="secondary-button">
+
+                        Reset
+
+                    </button>
+
+                </div>
+
+
+                <div class="timer-info">
+
+                    <p>
+
+                        Completed Sessions:
+
+                        <strong id="completed-sessions">
+                            0
+                        </strong>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+<!-- ============================================================
+     STUDY PLANNER
+     ============================================================ -->
+
+<div class="study-planner-section">
+
+    <div class="study-planner-header">
+
+        <div>
+
+            <h3>📅 Daily Study Planner</h3>
+
+            <p>
+                A simple study plan generated from your
+                subjects, tasks, and upcoming exams.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="study-planner"
+        class="study-planner-list">
+
+        <div class="study-plan-item">
+
+            <div class="study-plan-number">
+                1
+            </div>
+
+            <div class="study-plan-content">
+
+                <h4>
+                    Getting Your Study Plan Ready
+                </h4>
+
+                <p>
+                    Add subjects, tasks, and exams to
+                    generate your personalized study plan.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- ============================================================
+     AI STUDY ASSISTANT
+     ============================================================ -->
+
+<section
+    id="ai-study-assistant"
+    class="ai-study-assistant-section">
+
+    <div class="ai-assistant-header">
+
+        <div>
+
+            <h3>🤖 AI Study Assistant</h3>
+
+            <p>
+                Get personalized study guidance based on
+                your subjects, tasks, exams, and study activity.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="ai-assistant-chat">
+
+        <div
+            id="ai-assistant-messages"
+            class="ai-assistant-messages">
+
+            <div class="ai-message assistant-message">
+
+                <div class="ai-message-icon">
+                    🤖
+                </div>
+
+                <div class="ai-message-content">
+
+                    <strong>
+                        Smart Study Assistant
+                    </strong>
+
+                    <p>
+                        Hi! Ask me what you should study,
+                        which subject needs attention, or
+                        how you can plan your study time.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="ai-assistant-input-area">
+
+            <input
+                type="text"
+                id="ai-assistant-input"
+                placeholder="Ask me what you should study today..."
+                autocomplete="off"
+            >
+
+            <button
+                id="ai-assistant-send"
+                class="primary-button">
+                Send
+            </button>
+
+        </div>
+
+
+        <div class="ai-suggestion-buttons">
+
+    <button
+        class="ai-suggestion-button"
+        data-question="What should I study today?">
+        📚 What should I study today?
+    </button>
+
+    <button
+        class="ai-suggestion-button"
+        data-question="Which subject needs the most attention?">
+        📊 Which subject needs attention?
+    </button>
+
+    <button
+        class="ai-suggestion-button"
+        data-question="What exams should I prepare for?">
+        📝 What exams should I prepare for?
+    </button>
+
+    <button
+        class="ai-suggestion-button"
+        id="generate-study-plan-button">
+        🧠 Generate My Study Plan
+    </button>
+
+</div>
+
+    </div>
+
+</section>
+    </main>
+
+
+    <!-- ========================================
+         JAVASCRIPT
+    ======================================== -->
+
+    <script src="js/app.js"></script>
+<script src="js/ai-assistant.js"></script>
+<script src="js/auth.js"></script>
+</body>
+
+</html>
