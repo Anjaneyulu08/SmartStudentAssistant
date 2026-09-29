@@ -1385,7 +1385,23 @@ function addSchedule() {
 
     renderSchedule();
 }
+/* ============================================================
+   ADD SCHEDULE BUTTON CONNECTION
+   ============================================================ */
 
+const addScheduleButton =
+    document.getElementById(
+        "add-schedule-button"
+    );
+
+if (addScheduleButton) {
+
+    addScheduleButton.addEventListener(
+        "click",
+        addSchedule
+    );
+
+}
 
 function deleteSchedule(index) {
 
