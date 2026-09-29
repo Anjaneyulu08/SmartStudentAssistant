@@ -833,6 +833,23 @@ function addSubject() {
 
     renderSubjects();
 }
+/* ============================================================
+   ADD SUBJECT BUTTON CONNECTION
+   ============================================================ */
+
+const addSubjectButton =
+    document.getElementById(
+        "add-subject-button"
+    );
+
+if (addSubjectButton) {
+
+    addSubjectButton.addEventListener(
+        "click",
+        addSubject
+    );
+
+}
 
 
 function editSubject(index) {
