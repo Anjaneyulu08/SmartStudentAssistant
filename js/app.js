@@ -1094,6 +1094,23 @@ function addNote() {
 
     renderNotes();
 }
+/* ============================================================
+   ADD NOTE BUTTON CONNECTION
+   ============================================================ */
+
+const addNoteButton =
+    document.getElementById(
+        "add-note-button"
+    );
+    console.log("ADD NOTE BUTTON:", addNoteButton);
+if (addNoteButton) {
+
+    addNoteButton.addEventListener(
+        "click",
+        addNote
+    );
+
+}
 
 
 function deleteNote(index) {
