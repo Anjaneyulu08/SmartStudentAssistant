@@ -1385,23 +1385,7 @@ function addSchedule() {
 
     renderSchedule();
 }
-/* ============================================================
-   ADD SCHEDULE BUTTON CONNECTION
-   ============================================================ */
 
-const addScheduleButton =
-    document.getElementById(
-        "add-schedule-button"
-    );
-
-if (addScheduleButton) {
-
-    addScheduleButton.addEventListener(
-        "click",
-        addSchedule
-    );
-
-}
 
 function deleteSchedule(index) {
 
@@ -1532,80 +1516,39 @@ function renderExams() {
 }
 
 
+/* ============================================================
+   ADD EXAM
+   ============================================================ */
+
 function addExam() {
 
     const subject =
-        prompt(
-            "Enter exam subject:"
-        );
+        prompt("Enter exam subject:");
 
-
-    if (
-        !subject ||
-        !subject.trim()
-    ) {
-
+    if (!subject || !subject.trim()) {
         return;
-
     }
-
 
     const date =
         prompt(
             "Enter exam date (YYYY-MM-DD):"
         );
 
-
-    if (
-        !date ||
-        !date.trim()
-    ) {
-
+    if (!date || !date.trim()) {
         return;
-
     }
-
-
-    const selectedDate =
-        new Date(date);
-
-
-    if (
-        isNaN(
-            selectedDate.getTime()
-        )
-    ) {
-
-        alert(
-            "Please enter a valid date."
-        );
-
-        return;
-
-    }
-
 
     const time =
         prompt(
-            "Enter exam time:"
+            "Enter exam time (example: 10:00 AM):"
         );
 
-
-    if (
-        !time ||
-        !time.trim()
-    ) {
-
+    if (time === null) {
         return;
-
     }
 
-
     const exams =
-        getData(
-            EXAMS_KEY
-        );
-
+        getData(EXAMS_KEY);
 
     exams.push({
 
@@ -1616,25 +1559,30 @@ function addExam() {
             date.trim(),
 
         time:
-            time.trim()
+            time.trim(),
+
+        createdAt:
+            new Date().toISOString()
 
     });
-
-
-    exams.sort(
-        (a, b) =>
-            new Date(a.date) -
-            new Date(b.date)
-    );
-
 
     saveData(
         EXAMS_KEY,
         exams
     );
 
-
     renderExams();
+
+    updateDashboardStats();
+
+    updateSmartDashboard();
+
+    updateAcademicInsights();
+
+    updateAcademicAnalytics();
+
+    updateStudyPlanner();
+
 }
 
 
