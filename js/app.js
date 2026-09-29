@@ -13,10 +13,9 @@ const SUBJECTS_KEY = "studentSubjects";
 const NOTES_KEY = "studentNotes";
 const SCHEDULE_KEY = "studentSchedule";
 const EXAMS_KEY = "studentExams";
-
 const STUDY_SESSIONS_KEY = "completedStudySessions";
 const STUDY_HISTORY_KEY = "studySessionHistory";
-
+const KNOWLEDGE_TEST_RESULTS_KEY ="knowledgeTestResults";
 
 // ============================================================
 // HELPER FUNCTIONS
@@ -679,8 +678,77 @@ function renderSubjects() {
     updateAcademicAnalytics();
     updateSmartRecommendations();
     updateStudyPlanner();
+    populateKnowledgeTestSubjects();
 }
+/* ============================================================
+   KNOWLEDGE TEST - SUBJECT DROPDOWN
+   Only subjects with 100% progress are available
+   ============================================================ */
 
+function populateKnowledgeTestSubjects() {
+
+    const subjectSelect =
+        document.getElementById(
+            "knowledge-test-subject"
+        );
+
+    if (!subjectSelect) {
+        return;
+    }
+
+
+    const subjects =
+        getData(SUBJECTS_KEY);
+
+
+    const completedSubjects =
+        subjects.filter(
+            subject =>
+                Number(subject.progress) === 100
+        );
+
+
+    subjectSelect.innerHTML = `
+        <option value="">
+            Select a completed subject
+        </option>
+    `;
+
+
+    if (completedSubjects.length === 0) {
+
+        subjectSelect.innerHTML += `
+            <option value="" disabled>
+                Complete a subject to unlock its test
+            </option>
+        `;
+
+        return;
+    }
+
+
+    completedSubjects.forEach(
+        (subject) => {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                subject.name;
+
+            option.textContent =
+                `✅ ${subject.name}`;
+
+            subjectSelect.appendChild(
+                option
+            );
+
+        }
+    );
+
+}
 
 function addSubject() {
 
@@ -5852,3 +5920,1093 @@ function renderNotifications() {
    ============================================================ */
 
 renderNotifications();
+/* ============================================================
+   KNOWLEDGE TEST
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   KNOWLEDGE TEST QUESTION BANK
+   ------------------------------------------------------------ */
+
+const KNOWLEDGE_TEST_QUESTION_BANK = {
+
+    "Database Management Systems": {
+
+        easy: [
+
+            {
+                question:
+                    "What does DBMS stand for?",
+
+                options: [
+                    "Database Management Systems",
+                    "Data Backup Management System",
+                    "Database Monitoring System",
+                    "Data Management Software"
+                ],
+
+                answer: 0
+            },
+
+            {
+                question:
+                    "Which SQL command is used to retrieve data?",
+
+                options: [
+                    "INSERT",
+                    "SELECT",
+                    "DELETE",
+                    "UPDATE"
+                ],
+
+                answer: 1
+            },
+
+            {
+                question:
+                    "Which key uniquely identifies a record in a table?",
+
+                options: [
+                    "Foreign Key",
+                    "Primary Key",
+                    "Candidate Key",
+                    "Composite Key"
+                ],
+
+                answer: 1
+            },
+
+            {
+                question:
+                    "Which SQL command is used to add a new record?",
+
+                options: [
+                    "ADD",
+                    "INSERT",
+                    "CREATE",
+                    "APPEND"
+                ],
+
+                answer: 1
+            },
+
+            {
+                question:
+                    "What is a table in a relational database?",
+
+                options: [
+                    "A collection of rows and columns",
+                    "Only a collection of columns",
+                    "Only a collection of rows",
+                    "A programming function"
+                ],
+
+                answer: 0
+            }
+
+        ],
+
+
+        medium: [
+
+            {
+                question:
+                    "Which normal form removes partial dependency?",
+
+                options: [
+                    "1NF",
+                    "2NF",
+                    "3NF",
+                    "BCNF"
+                ],
+
+                answer: 1
+            },
+
+            {
+                question:
+                    "Which command permanently removes a table?",
+
+                options: [
+                    "DELETE",
+                    "REMOVE",
+                    "DROP",
+                    "CLEAR"
+                ],
+
+                answer: 2
+            },
+
+            {
+                question:
+                    "What is a foreign key used for?",
+
+                options: [
+                    "To uniquely identify every database",
+                    "To establish a relationship between tables",
+                    "To delete duplicate rows",
+                    "To encrypt a table"
+                ],
+
+                answer: 1
+            },
+
+            {
+                question:
+                    "Which property of a transaction means it is treated as an indivisible unit?",
+
+                options: [
+                    "Consistency",
+                    "Isolation",
+                    "Atomicity",
+                    "Durability"
+                ],
+
+                answer: 2
+            },
+
+            {
+                question:
+                    "Which SQL clause is used to filter rows?",
+
+                options: [
+                    "ORDER BY",
+                    "GROUP BY",
+                    "WHERE",
+                    "HAVING"
+                ],
+
+                answer: 2
+            }
+
+        ],
+
+
+        hard: [
+
+            {
+                question:
+                    "Which normal form eliminates transitive dependency?",
+
+                options: [
+                    "1NF",
+                    "2NF",
+                    "3NF",
+                    "4NF"
+                ],
+
+                answer: 2
+            },
+
+            {
+                question:
+                    "Which ACID property ensures that committed data survives system failure?",
+
+                options: [
+                    "Atomicity",
+                    "Consistency",
+                    "Isolation",
+                    "Durability"
+                ],
+
+                answer: 3
+            },
+
+            {
+                question:
+                    "Which join returns only the rows having matching values in both tables?",
+
+                options: [
+                    "LEFT JOIN",
+                    "RIGHT JOIN",
+                    "FULL JOIN",
+                    "INNER JOIN"
+                ],
+
+                answer: 3
+            },
+
+            {
+                question:
+                    "Which technique is primarily used to improve database query performance?",
+
+                options: [
+                    "Indexing",
+                    "Normalization only",
+                    "Deleting tables",
+                    "Removing constraints"
+                ],
+
+                answer: 0
+            },
+
+            {
+                question:
+                    "Which SQL clause is used to filter grouped results?",
+
+                options: [
+                    "WHERE",
+                    "HAVING",
+                    "ORDER BY",
+                    "LIMIT"
+                ],
+
+                answer: 1
+            }
+
+        ]
+
+    },
+
+
+    "Operating System": {
+
+        easy: [
+
+            {
+                question:
+                    "What is the main function of an operating system?",
+
+                options: [
+                    "Manage computer resources",
+                    "Create websites",
+                    "Design databases",
+                    "Write source code"
+                ],
+
+                answer: 0
+            },
+
+            {
+                question:
+                    "Which component manages processes in an operating system?",
+
+                options: [
+                    "Process scheduler",
+                    "Compiler",
+                    "Web browser",
+                    "Text editor"
+                ],
+
+                answer: 0
+            },
+
+            {
+                question:
+                    "What is a process?",
+
+                options: [
+                    "A program in execution",
+                    "A storage device",
+                    "A programming language",
+                    "A network cable"
+                ],
+
+                answer: 0
+            },
+
+            {
+                question:
+                    "Which scheduling algorithm uses a time quantum?",
+
+                options: [
+                    "FCFS",
+                    "Round Robin",
+                    "SJF",
+                    "Priority"
+                ],
+
+                answer: 1
+            },
+
+            {
+                question:
+                    "Which memory is directly accessible by the CPU?",
+
+                options: [
+                    "Main memory",
+                    "Hard disk",
+                    "DVD",
+                    "USB drive"
+                ],
+
+                answer: 0
+            }
+
+        ],
+
+
+        medium: [
+
+            {
+                question:
+                    "Which scheduling algorithm executes the process with the shortest CPU burst first?",
+
+                options: [
+                    "FCFS",
+                    "Round Robin",
+                    "SJF",
+                    "FIFO"
+                ],
+
+                answer: 2
+            },
+
+            {
+                question:
+                    "Which condition is necessary for deadlock?",
+
+                options: [
+                    "Mutual exclusion",
+                    "Compilation",
+                    "Paging",
+                    "Caching"
+                ],
+
+                answer: 0
+            },
+
+            {
+                question:
+                    "What is virtual memory?",
+
+                options: [
+                    "A technique that uses secondary storage to extend apparent main memory",
+                    "A type of CPU",
+                    "A type of keyboard",
+                    "A network protocol"
+                ],
+
+                answer: 0
+            },
+
+            {
+                question:
+                    "What does a context switch do?",
+
+                options: [
+                    "Changes the current process or thread being executed",
+                    "Deletes a process permanently",
+                    "Formats memory",
+                    "Creates a new hard disk"
+                ],
+
+                answer: 0
+            },
+
+            {
+                question:
+                    "Which technique divides memory into fixed-size blocks?",
+
+                options: [
+                    "Paging",
+                    "Segmentation",
+                    "Compaction",
+                    "Spooling"
+                ],
+
+                answer: 0
+            }
+
+        ],
+
+
+        hard: [
+
+            {
+                question:
+                    "Which of the following is NOT one of the four necessary conditions for deadlock?",
+
+                options: [
+                    "Mutual exclusion",
+                    "Hold and wait",
+                    "Preemption",
+                    "Circular wait"
+                ],
+
+                answer: 2
+            },
+
+            {
+                question:
+                    "Which algorithm can be used for deadlock avoidance?",
+
+                options: [
+                    "Banker's Algorithm",
+                    "Round Robin",
+                    "FCFS",
+                    "FIFO"
+                ],
+
+                answer: 0
+            },
+
+            {
+                question:
+                    "What is thrashing?",
+
+                options: [
+                    "Excessive paging activity",
+                    "CPU overheating",
+                    "File deletion",
+                    "Network congestion"
+                ],
+
+                answer: 0
+            },
+
+            {
+                question:
+                    "Which page replacement algorithm replaces the page that has not been used for the longest period of time?",
+
+                options: [
+                    "FIFO",
+                    "LRU",
+                    "FCFS",
+                    "Round Robin"
+                ],
+
+                answer: 1
+            },
+
+            {
+                question:
+                    "Which mechanism allows processes to communicate and synchronize by exchanging messages?",
+
+                options: [
+                    "Message passing",
+                    "Paging",
+                    "Spooling",
+                    "Fragmentation"
+                ],
+
+                answer: 0
+            }
+
+        ]
+
+    }
+
+};
+
+
+/* ------------------------------------------------------------
+   SHUFFLE QUESTIONS
+   ------------------------------------------------------------ */
+
+function shuffleKnowledgeTestArray(array) {
+
+    const shuffled =
+        [...array];
+
+    for (
+        let i = shuffled.length - 1;
+        i > 0;
+        i--
+    ) {
+
+        const j =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
+
+        [
+            shuffled[i],
+            shuffled[j]
+        ] =
+        [
+            shuffled[j],
+            shuffled[i]
+        ];
+
+    }
+
+    return shuffled;
+
+}
+
+
+/* ------------------------------------------------------------
+   GET QUESTIONS FOR TEST
+   ------------------------------------------------------------ */
+
+function getKnowledgeTestQuestions(
+    subjectName,
+    difficulty,
+    questionCount
+) {
+
+    const subjectBank =
+        KNOWLEDGE_TEST_QUESTION_BANK[
+            subjectName
+        ];
+
+
+    if (!subjectBank) {
+
+        return [];
+
+    }
+
+
+    let questions = [];
+
+
+    if (difficulty === "mixed") {
+
+        questions = [
+            ...subjectBank.easy,
+            ...subjectBank.medium,
+            ...subjectBank.hard
+        ];
+
+    } else {
+
+        questions =
+            [
+                ...(subjectBank[difficulty] || [])
+            ];
+
+    }
+
+
+    questions =
+        shuffleKnowledgeTestArray(
+            questions
+        );
+
+
+    return questions.slice(
+        0,
+        Math.min(
+            Number(questionCount),
+            questions.length
+        )
+    );
+
+}
+
+
+/* ------------------------------------------------------------
+   START KNOWLEDGE TEST
+   ------------------------------------------------------------ */
+
+let currentKnowledgeTestQuestions = [];
+
+let currentKnowledgeTestSubject = "";
+
+let currentKnowledgeTestScore = 0;
+
+
+function startKnowledgeTest() {
+
+    const subjectSelect =
+        document.getElementById(
+            "knowledge-test-subject"
+        );
+
+    const questionCountSelect =
+        document.getElementById(
+            "knowledge-test-question-count"
+        );
+
+    const difficultySelect =
+        document.getElementById(
+            "knowledge-test-difficulty"
+        );
+
+
+    if (
+        !subjectSelect ||
+        !questionCountSelect ||
+        !difficultySelect
+    ) {
+
+        return;
+
+    }
+
+
+    const subject =
+        subjectSelect.value;
+
+    const questionCount =
+        Number(
+            questionCountSelect.value
+        );
+
+    const difficulty =
+        difficultySelect.value;
+
+
+    if (!subject) {
+
+        alert(
+            "Please select a completed subject."
+        );
+
+        return;
+
+    }
+
+
+    currentKnowledgeTestQuestions =
+        getKnowledgeTestQuestions(
+            subject,
+            difficulty,
+            questionCount
+        );
+
+
+    if (
+        currentKnowledgeTestQuestions.length === 0
+    ) {
+
+        alert(
+            "No questions are available for this subject and difficulty."
+        );
+
+        return;
+
+    }
+
+
+    currentKnowledgeTestSubject =
+        subject;
+
+
+    currentKnowledgeTestScore = 0;
+
+
+    renderKnowledgeTestQuestions();
+
+
+    const setup =
+        document.querySelector(
+            ".knowledge-test-setup"
+        );
+
+    const testArea =
+        document.getElementById(
+            "knowledge-test-area"
+        );
+
+    const resultArea =
+        document.getElementById(
+            "knowledge-test-result"
+        );
+
+
+    if (setup) {
+
+        setup.style.display =
+            "none";
+
+    }
+
+
+    if (resultArea) {
+
+        resultArea.style.display =
+            "none";
+
+    }
+
+
+    if (testArea) {
+
+        testArea.style.display =
+            "block";
+
+    }
+
+}
+
+
+/* ------------------------------------------------------------
+   RENDER QUESTIONS
+   ------------------------------------------------------------ */
+
+function renderKnowledgeTestQuestions() {
+
+    const questionContainer =
+        document.getElementById(
+            "knowledge-test-questions"
+        );
+
+
+    const progressText =
+        document.getElementById(
+            "knowledge-test-progress"
+        );
+
+
+    const title =
+        document.getElementById(
+            "knowledge-test-title"
+        );
+
+
+    if (!questionContainer) {
+
+        return;
+
+    }
+
+
+    if (title) {
+
+        title.textContent =
+            `${currentKnowledgeTestSubject} - Knowledge Test`;
+
+    }
+
+
+    if (progressText) {
+
+        progressText.textContent =
+            `${currentKnowledgeTestQuestions.length} Questions`;
+
+    }
+
+
+    questionContainer.innerHTML =
+        currentKnowledgeTestQuestions.map(
+            (question, index) => {
+
+                return `
+
+                    <div class="knowledge-test-question">
+
+                        <h4>
+                            ${index + 1}.
+                            ${escapeHTML(
+                                question.question
+                            )}
+                        </h4>
+
+
+                        <div class="knowledge-test-options">
+
+                            ${question.options.map(
+                                (option, optionIndex) => {
+
+                                    return `
+
+                                        <label
+                                            class="knowledge-test-option"
+                                        >
+
+                                            <input
+                                                type="radio"
+                                                name="knowledge-question-${index}"
+                                                value="${optionIndex}"
+                                            >
+
+                                            <span>
+                                                ${escapeHTML(
+                                                    option
+                                                )}
+                                            </span>
+
+                                        </label>
+
+                                    `;
+
+                                }
+                            ).join("")}
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* ------------------------------------------------------------
+   SUBMIT KNOWLEDGE TEST
+   ------------------------------------------------------------ */
+
+function submitKnowledgeTest() {
+
+    if (
+        currentKnowledgeTestQuestions.length === 0
+    ) {
+
+        return;
+
+    }
+
+
+    let score = 0;
+
+
+    currentKnowledgeTestQuestions.forEach(
+        (question, index) => {
+
+            const selected =
+                document.querySelector(
+                    `input[name="knowledge-question-${index}"]:checked`
+                );
+
+
+            if (
+                selected &&
+                Number(selected.value) ===
+                Number(question.answer)
+            ) {
+
+                score++;
+
+            }
+
+        }
+    );
+
+
+    currentKnowledgeTestScore =
+        score;
+
+
+    showKnowledgeTestResult();
+
+}
+
+
+/* ------------------------------------------------------------
+   SHOW TEST RESULT
+   ------------------------------------------------------------ */
+
+function showKnowledgeTestResult() {
+
+    const resultArea =
+        document.getElementById(
+            "knowledge-test-result"
+        );
+
+    const scoreElement =
+        document.getElementById(
+            "knowledge-test-score"
+        );
+
+    const percentageElement =
+        document.getElementById(
+            "knowledge-test-percentage"
+        );
+
+    const messageElement =
+        document.getElementById(
+            "knowledge-test-result-message"
+        );
+
+    if (!resultArea) {
+        return;
+    }
+
+    const totalQuestions =
+        currentKnowledgeTestQuestions.length;
+
+    const percentage =
+        totalQuestions > 0
+            ? Math.round(
+                (currentKnowledgeTestScore /
+                    totalQuestions) * 100
+            )
+            : 0;
+
+    /* --------------------------------------------------------
+       DISPLAY RESULT
+       -------------------------------------------------------- */
+
+    if (scoreElement) {
+
+        scoreElement.textContent =
+            `${currentKnowledgeTestScore} / ${totalQuestions}`;
+
+    }
+
+    if (percentageElement) {
+
+        percentageElement.textContent =
+            `${percentage}%`;
+
+    }
+
+    if (messageElement) {
+
+        if (percentage >= 90) {
+
+            messageElement.textContent =
+                "Excellent! You have a strong understanding of this subject.";
+
+        } else if (percentage >= 75) {
+
+            messageElement.textContent =
+                "Very good! You have a solid understanding of this subject.";
+
+        } else if (percentage >= 50) {
+
+            messageElement.textContent =
+                "Good effort! Review the topics you found difficult.";
+
+        } else {
+
+            messageElement.textContent =
+                "Keep studying! Review the subject and try the test again.";
+
+        }
+
+    }
+
+
+    /* --------------------------------------------------------
+       SAVE KNOWLEDGE TEST RESULT
+       -------------------------------------------------------- */
+
+    const results =
+        getData(
+            KNOWLEDGE_TEST_RESULTS_KEY
+        );
+
+    const result = {
+
+        subject:
+            currentKnowledgeTestSubject,
+
+        score:
+            currentKnowledgeTestScore,
+
+        total:
+            totalQuestions,
+
+        percentage:
+            percentage,
+
+        date:
+            new Date().toISOString()
+
+    };
+
+    results.push(result);
+
+    saveData(
+        KNOWLEDGE_TEST_RESULTS_KEY,
+        results
+    );
+
+
+    /* --------------------------------------------------------
+       SHOW RESULT AREA
+       -------------------------------------------------------- */
+
+    resultArea.style.display =
+        "block";
+
+
+    /* Hide test area */
+
+    const testArea =
+        document.getElementById(
+            "knowledge-test-area"
+        );
+
+    if (testArea) {
+
+        testArea.style.display =
+            "none";
+
+    }
+
+}
+
+
+/* ------------------------------------------------------------
+   RETAKE KNOWLEDGE TEST
+   ------------------------------------------------------------ */
+
+function retakeKnowledgeTest() {
+
+    const setup =
+        document.querySelector(
+            ".knowledge-test-setup"
+        );
+
+    const resultArea =
+        document.getElementById(
+            "knowledge-test-result"
+        );
+
+
+    if (resultArea) {
+
+        resultArea.style.display =
+            "none";
+
+    }
+
+
+    if (setup) {
+
+        setup.style.display =
+            "block";
+
+    }
+
+}
+
+
+/* ------------------------------------------------------------
+   KNOWLEDGE TEST BUTTON CONNECTIONS
+   ------------------------------------------------------------ */
+
+const startKnowledgeTestButton =
+    document.getElementById(
+        "start-knowledge-test"
+    );
+
+
+const submitKnowledgeTestButton =
+    document.getElementById(
+        "submit-knowledge-test"
+    );
+
+
+const retakeKnowledgeTestButton =
+    document.getElementById(
+        "retake-knowledge-test"
+    );
+
+
+if (startKnowledgeTestButton) {
+
+    startKnowledgeTestButton.addEventListener(
+        "click",
+        startKnowledgeTest
+    );
+
+}
+
+
+if (submitKnowledgeTestButton) {
+
+    submitKnowledgeTestButton.addEventListener(
+        "click",
+        submitKnowledgeTest
+    );
+
+}
+
+
+if (retakeKnowledgeTestButton) {
+
+    retakeKnowledgeTestButton.addEventListener(
+        "click",
+        retakeKnowledgeTest
+    );
+
+}

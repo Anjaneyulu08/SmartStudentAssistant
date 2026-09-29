@@ -1832,3 +1832,78 @@ select:focus {
     }
 
 }
+/* ============================================================
+   KNOWLEDGE TEST - RESULT DISPLAY
+   ============================================================ */
+
+.knowledge-test-result {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 20px;
+    padding: 25px;
+    text-align: center;
+}
+
+.knowledge-test-result h4 {
+    display: block;
+    margin: 0 0 20px 0;
+    font-size: 24px;
+}
+
+.knowledge-test-score {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    margin: 20px 0;
+}
+
+.knowledge-test-score strong {
+    display: block;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.knowledge-test-score span {
+    display: block;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+#knowledge-test-result-message {
+    display: block;
+    margin: 15px auto 25px auto;
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 700px;
+}
+
+#retake-knowledge-test {
+    display: inline-block;
+}
+/* ============================================================
+   MOBILE SIDEBAR - KNOWLEDGE TEST
+   ============================================================ */
+
+@media (max-width: 700px) {
+
+    .sidebar-nav {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .sidebar-nav .nav-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .sidebar-nav .nav-item[href="#knowledge-test"] {
+        display: flex;
+    }
+
+}
